@@ -1,0 +1,35 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Escolha o Tipo de Cadastro{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-5">Selecione o tipo de cadastro</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-5 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pessoa Física</h5>
+                    <p class="card-text">Cadastre-se como pessoa física para acompanhar as trilhas e eventos.</p>
+                    <a href="{% url 'home_view:pf_signup' %}" class="btn btn-primary">Cadastrar como Pessoa Física</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pessoa Jurídica</h5>
+                    <p class="card-text">Cadastre seu negócio como parceiro dos Caminhos do Planalto Central.</p>
+                    <a href="{% url 'home_view:pj_signup' %}" class="btn btn-primary">Cadastrar como Pessoa Jurídica</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <p>Já possui cadastro? <a href="{% url 'home_view:login' %}">Faça login aqui</a></p>
+    </div>
+</div>
+{% endblock %}

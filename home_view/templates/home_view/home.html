@@ -1,0 +1,34 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Caminhos do Planalto Central - Início{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">Bem-vindo aos Caminhos do Planalto Central</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <p class="lead mb-4">
+                Somos uma plataforma dedicada a conectar parceiros e interessados nas trilhas que passam pela região de Brasília.
+            </p>
+            
+            <div class="mb-4">
+                <a href="{% url 'home_view:user_type' %}" class="btn btn-primary btn-lg">Cadastre-se</a>
+                <a href="{% url 'home_view:login' %}" class="btn btn-outline-primary btn-lg ms-2">Login</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h2 class="mb-4">Sobre o Projeto</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p>
+                    Os Caminhos do Planalto Central é uma iniciativa que visa catalogar e promover as trilhas 
+                    da região central do Brasil, conectando turistas, empresas e entusiastas do ecoturismo.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

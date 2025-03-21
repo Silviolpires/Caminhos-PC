@@ -1,0 +1,53 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Cadastro Completo de Pessoa Jurídica{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h1 class="mb-4 text-center">Cadastro Completo de Pessoa Jurídica</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Dados Pessoais -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Dados Pessoais do Responsável</h5>
+                </div>
+                <div class="card-body">
+                    {{ pessoa_form.as_p }}
+                </div>
+            </div>
+            
+            <!-- Dados do Empreendimento -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Dados do Empreendimento</h5>
+                </div>
+                <div class="card-body">
+                    {{ juridica_form.as_p }}
+                </div>
+            </div>
+            
+            <!-- Endereço Detalhado -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Endereço Detalhado</h5>
+                </div>
+                <div class="card-body">
+                    {{ endereco_form.as_p }}
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+            </div>
+        </form>
+        
+        <div class="text-center mt-3">
+            <p>Já possui uma conta? <a href="{% url 'home_view:login' %}">Faça login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
