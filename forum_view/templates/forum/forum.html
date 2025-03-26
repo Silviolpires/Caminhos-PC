@@ -1,0 +1,44 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Fórum{% endblock %}
+
+{% block content %}
+    <!-- Anúncios do fórum -->
+    <section>
+        {% for post in posts %}
+        <article>
+            <p>/{{ post.tipo }}</p> <!-- Tipo de anúncio -->
+            <h2>{{ post.titulo }}</h2> <!-- Título do Post -->
+            <p>{{ post.descricao }}</p> <!-- Descrição do Post -->
+            {% if post.imagem %}
+                <img src="{{ post.imagem.url }}" alt="Imagem do Post">
+            {% endif %}
+            <!-- Parte da interação com o anuncio -->
+            <div>
+                <button> {{ post.likes }}</button>
+                <button></button>
+                <button></button>
+            </div>
+        </article>
+        {% empty %}
+            <p>Não há posts disponíveis no momento.</p>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block extra_head %}
+    {% load static %}
+    <!-- Estilos específicos do fórum, se necessário -->
+    <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
+
+{% block header %}
+    <header>
+        {% load static %}
+        <img src="{% static 'evento1.jpg' %}" alt="Imagem do evento">
+        <a href="{% url 'home' %}"></a> <!-- Link para a Home -->
+        <h1>Fórum</h1>
+        <a href="#"><img src="{% static 'menu_icon.png' %}" alt="Menu"></a> <!-- Ícone de menu -->
+        <a href="#"><img src="{% static 'search_icon.png' %}" alt="Buscar"></a> <!-- Ícone de busca -->
+    </header>
+{% endblock %}
