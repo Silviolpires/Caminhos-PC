@@ -1,0 +1,23 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Novo Evento{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Publicar novo evento</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-enviar">Publicar</button>
+    </form>
+
+    <a href="{% url 'forum' %}" class="btn-voltar">← Voltar para o Fórum</a>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
