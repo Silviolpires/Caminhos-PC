@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=C:\Users\Silvio\Desktop\Caminhos-PC\Caminhos-PC\.venv"
+set "VIRTUAL_ENV=C:\Users\ocfer\Visual\ENZO - CPC\atualizacao\Caminhos-PC\.venv"
 
 if not defined PROMPT set PROMPT=$P$G
 
