@@ -12,6 +12,7 @@ class Post(models.Model):
     imagem = models.ImageField(upload_to='uploads/', blank=True, null=True)
     likes = models.IntegerField(default=0)
     criado_em = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return self.titulo
