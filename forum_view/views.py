@@ -26,6 +26,13 @@ def forumOne(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'forum/forumOne.html', {'post': post})
 
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.likes += 1
+    post.save()
+    return redirect('forum_one', pk=post.id)
+
+
 
 def criar_post(request):
     if request.method == 'POST':

@@ -13,6 +13,10 @@
         {% endif %}
         <h1 class="post-titulo">{{ post.titulo }}</h1>
         <p class="post-descricao">{{ post.descricao }}</p>
+        <form method="POST" action="{% url 'like_post' post.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-like">👍 Curtir ({{ post.likes }})</button>
+        
     </div>
 
 </div>
