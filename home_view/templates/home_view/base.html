@@ -5,72 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Caminhos do Planalto Central{% endblock %}</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
-    {% block extra_css %}{% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Barra de navegação -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home_view:home' %}">Caminhos do Planalto Central</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home_view:home' %}">Início</a>
-                    </li>
-                    <!-- Botão para o Fórum -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'forum:forum' %}">Fórum</a>
-                    </li>
-                    <!-- Condicionais para usuários logados/não logados -->
-                    {% if request.session.user_id %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home_view:home' %}">CPC</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home_view:logout' %}">Sair</a>
+                            <a class="nav-link" href="{% url 'home_view:home' %}">Início</a>
                         </li>
-                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home_view:friends_list' %}">Parceiros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home_view:user_type' %}">Cadastrar</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home_view:login' %}">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home_view:user_type' %}">Cadastre-se</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mensagens de feedback -->
-    <div class="container mt-3">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </ul>
                 </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Conteúdo principal -->
-    <div class="container my-4">
-        {% block content %}{% endblock %}
-    </div>
+    <main class="container my-4">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    <!-- Rodapé -->
-    <footer class="bg-light py-4 mt-5">
+    <footer class="bg-light py-3 mt-5">
         <div class="container text-center">
-            <p class="mb-0">&copy; 2025 Caminhos do Planalto Central</p>
+            <p class="mb-0">Caminhos do Planalto Central - 2025</p>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JS personalizado -->
-    {% block extra_js %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
