@@ -13,8 +13,23 @@
             </p>
             
             <div class="mb-4">
-                <a href="{% url 'home_view:user_type' %}" class="btn btn-primary btn-lg">Cadastre-se</a>
-                <a href="{% url 'home_view:login' %}" class="btn btn-outline-primary btn-lg ms-2">Login</a>
+                {% if request.session.user_id %}
+                    <h3>Olá, {{ request.session.user_name }}!</h3>
+                    <p>Você está logado como 
+                        {% if request.session.user_type == 'fisica' %}
+                            Pessoa Física
+                        {% elif request.session.user_type == 'juridica' %}
+                            Pessoa Jurídica
+                        {% else %}
+                            {{ request.session.user_type }}
+                        {% endif %}
+                    </p>
+                    <!-- Botão "Sair" apenas para usuários logados -->
+                    <a href="{% url 'home_view:logout' %}" class="btn btn-outline-danger btn-lg">Sair</a>
+                {% else %}
+                    <a href="{% url 'home_view:user_type' %}" class="btn btn-primary btn-lg">Cadastre-se</a>
+                    <a href="{% url 'home_view:login' %}" class="btn btn-outline-primary btn-lg ms-2">Login</a>
+                {% endif %}
             </div>
         </div>
     </div>
