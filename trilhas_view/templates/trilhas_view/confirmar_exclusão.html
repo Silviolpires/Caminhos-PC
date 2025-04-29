@@ -1,0 +1,23 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Excluir Trilha{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h3>Confirmar Exclusão</h3>
+        </div>
+        <div class="card-body">
+            <p>Tem certeza que deseja excluir a trilha <strong>{{ trilha.nome }}</strong>?</p>
+            <p>Esta ação não pode ser desfeita.</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+                <a href="{% url 'trilhas_view:detalhe_trilha' trilha.id %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
