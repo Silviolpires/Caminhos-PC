@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home_view',
     'forum_view',
+    'trilhas_view',
 ]
 
 MIDDLEWARE = [
