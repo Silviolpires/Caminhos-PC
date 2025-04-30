@@ -114,8 +114,15 @@ class LoginView(TemplateView):
             
             # Verificar a senha usando check_password
             if check_password(password, pessoa.password):
-                # Login bem-sucedido
-                return redirect('home_view:home')
+                # Login bem-sucedido - Armazenar dados na sessão
+                request.session['user_id'] = pessoa.id
+                request.session['user_email'] = pessoa.email
+                request.session['user_name'] = pessoa.name
+                request.session['user_type'] = 'fisica'
+                request.session['is_authenticated'] = True
+                
+                # Redirecionar para o dashboard em vez da home
+                return redirect('dashboard:main')
             else:
                 # Senha incorreta
                 return render(request, self.template_name, {
@@ -129,8 +136,16 @@ class LoginView(TemplateView):
                 
                 # Verificar a senha
                 if check_password(password, pessoa.password):
-                    # Login bem-sucedido
-                    return redirect('home_view:home')
+                    # Login bem-sucedido - Armazenar dados na sessão
+                    request.session['user_id'] = pessoa.id
+                    request.session['user_email'] = pessoa.email
+                    request.session['user_name'] = pessoa.name
+                    request.session['user_type'] = 'juridica'
+                    request.session['is_authenticated'] = True
+                    request.session['business_name'] = pessoa.business_name
+                    
+                    # Redirecionar para o dashboard em vez da home
+                    return redirect('dashboard:main')
                 else:
                     # Senha incorreta
                     return render(request, self.template_name, {
@@ -141,3 +156,47 @@ class LoginView(TemplateView):
                 return render(request, self.template_name, {
                     'error_message': 'E-mail não cadastrado.'
                 })
+            
+# Arquivo: home_view/decorators.py
+
+from django.shortcuts import redirect
+from django.urls import reverse
+from functools import wraps
+
+def login_required(view_func):
+    """
+    Decorador que verifica se o usuário está autenticado na sessão.
+    Se não estiver, redireciona para a página de login.
+    """
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        # Verificar se o usuário está autenticado na sessão
+        if not request.session.get('is_authenticated', False):
+            # Armazenar URL atual para redirecionamento após login
+            next_url = request.get_full_path()
+            login_url = f"{reverse('home_view:login')}?next={next_url}"
+            return redirect(login_url)
+        
+        # Se estiver autenticado, prossegue para a view
+        return view_func(request, *args, **kwargs)
+    
+    return wrapper  
+
+# Adicionar à views.py
+
+def logout_view(request):
+    """
+    View para realizar o logout do usuário, limpando a sessão.
+    """
+    # Limpar todas as variáveis de sessão relacionadas ao usuário
+    keys_to_remove = [
+        'user_id', 'user_email', 'user_name', 'user_type',
+        'is_authenticated', 'business_name'
+    ]
+    
+    for key in keys_to_remove:
+        if key in request.session:
+            del request.session[key]
+    
+    # Redirecionar para a página inicial
+    return redirect('home_view:home')          
