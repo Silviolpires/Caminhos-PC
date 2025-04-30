@@ -5,6 +5,29 @@ from django.contrib import messages
 from .forms import PessoaFisicaForm, PessoaJuridicaForm, EnderecoForm
 from .models import PessoaFisica, PessoaJuridica
 from django.contrib.auth.hashers import make_password, check_password
+from django.urls import reverse
+from functools import wraps
+
+def login_required(view_func):
+    """
+    Decorador que verifica se o usuário está autenticado na sessão.
+    Se não estiver, redireciona para a página de login.
+    """
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        # Verificar se o usuário está autenticado na sessão
+        if not request.session.get('is_authenticated', False):
+            # Armazenar URL atual para redirecionamento após login
+            next_url = request.get_full_path()
+            login_url = f"{reverse('home_view:login')}?next={next_url}"
+            return redirect(login_url)
+        
+        # Se estiver autenticado, prossegue para a view
+        return view_func(request, *args, **kwargs)
+    
+    return wrapper
+
+
 
 class HomeView(TemplateView):
     template_name = 'home_view/home.html'
