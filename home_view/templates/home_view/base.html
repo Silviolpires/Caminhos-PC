@@ -23,14 +23,51 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home_view:friends_list' %}">Parceiros</a>
                         </li>
+                        
+                        <!-- Menu para trilhas visível para todos -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'trilhas_view:lista_trilhas' %}">Trilhas</a>
+                        </li>
+                        
+                        <!-- Menu Fóruns visível para todos, mas com opções diferentes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'forum_view:forum' %}">Fóruns</a>
+                        </li>
+                        
+                        <!-- Item de menu apenas para não logados -->
+                        {% if not request.session.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home_view:user_type' %}">Cadastrar</a>
                         </li>
+                        {% endif %}
                     </ul>
+                    
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home_view:login' %}">Login</a>
-                        </li>
+                        {% if request.session.is_authenticated %}
+                            <!-- Menu para usuários logados -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ request.session.user_name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:main' %}">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:profile' %}">Meu Perfil</a></li>
+                                    {% if request.session.user_type == 'fisica' %}
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:minhas_trilhas' %}">Minhas Trilhas</a></li>
+                                    {% elif request.session.user_type == 'juridica' %}
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:meu_empreendimento' %}">Meu Empreendimento</a></li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'home_view:logout' %}">Sair</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <!-- Link de login para não logados -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home_view:login' %}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
