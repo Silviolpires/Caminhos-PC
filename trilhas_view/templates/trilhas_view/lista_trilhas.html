@@ -1,0 +1,35 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}Trilhas Disponíveis{% endblock %}
+
+{% block content %}
+<!-- Adicione no início do bloco content em lista_trilhas.html -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Trilhas Disponíveis</h1>
+    <a href="{% url 'trilhas_view:criar_trilha' %}" class="btn btn-success">Nova Trilha</a>
+</div>
+    
+    {% if trilhas %}
+        <div class="row">
+            {% for trilha in trilhas %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ trilha.nome }}</h5>
+                            <p class="card-text">
+                                <strong>Distância:</strong> {{ trilha.distancia }} km<br>
+                                <strong>Dificuldade:</strong> {{ trilha.get_nivel_dificuldade_display }}
+                            </p>
+                            <a href="{% url 'trilhas_view:detalhe_trilha' trilha.id %}" class="btn btn-primary">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            Não há trilhas cadastradas no momento.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

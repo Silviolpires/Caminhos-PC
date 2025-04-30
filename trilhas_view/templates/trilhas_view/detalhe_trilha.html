@@ -1,0 +1,60 @@
+{% extends 'home_view/base.html' %}
+
+{% block title %}{{ trilha.nome }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'trilhas_view:lista_trilhas' %}">Trilhas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ trilha.nome }}</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ trilha.nome }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>{{ trilha.descricao }}</p>
+                    
+                    <h4 class="mt-4">Informações da Trilha</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Distância:</strong> {{ trilha.distancia }} km</li>
+                        <li class="list-group-item"><strong>Duração estimada:</strong> {{ trilha.duracao }}</li>
+                        <li class="list-group-item"><strong>Nível de dificuldade:</strong> {{ trilha.get_nivel_dificuldade_display }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Guias disponíveis</h5>
+                            <a href="{% url 'trilhas_view:gerenciar_guias' trilha.id %}" class="btn btn-sm btn-info float-end">Gerenciar Guias</a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% if trilha.guias.all %}
+                                {% for guia in trilha.guias.all %}
+                                    <li class="list-group-item">{{ guia.nome }} {{ guia.sobrenome }}</li>
+                                {% endfor %}
+                            {% else %}
+                                <li class="list-group-item">Nenhum guia disponível para esta trilha.</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+                                    <!-- Adicione antes do fechamento do card-header em detalhe_trilha.html -->
+                    <div class="float-end">
+                        <a href="{% url 'trilhas_view:editar_trilha' trilha.id %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'trilhas_view:excluir_trilha' trilha.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                    </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            Criada em: {{ trilha.data_criacao|date:"d/m/Y" }} | Última atualização: {{ trilha.data_atualizacao|date:"d/m/Y" }}
+        </div>
+    </div>
+</div>
+{% endblock %}

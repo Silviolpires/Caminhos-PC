@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Guias - {{ trilha.nome }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'trilhas_view:lista_trilhas' %}">Trilhas</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'trilhas_view:detalhe_trilha' trilha.id %}">{{ trilha.nome }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gerenciar Guias</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Gerenciar Guias para: {{ trilha.nome }}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label">Selecione os Guias para esta Trilha:</label>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Selecionar</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for guia in todos_guias %}
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="guias" value="{{ guia.id }}" id="guia-{{ guia.id }}" 
+                                                {% if guia in guias_selecionados %}checked{% endif %}>
+                                        </div>
+                                    </td>
+                                    <td>{{ guia.nome }} {{ guia.sobrenome }}</td>
+                                    <td>{{ guia.cpf }}</td>
+                                    <td>{{ guia.telefone }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center">Nenhuma pessoa física cadastrada para ser guia.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    <a href="{% url 'trilhas_view:detalhe_trilha' trilha.id %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
