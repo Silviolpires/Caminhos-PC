@@ -1,0 +1,75 @@
+{% extends 'home_view/base.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- Menu lateral -->
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Dashboard</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'dashboard:main' %}" class="list-group-item list-group-item-action {% if active_menu == 'main' %}active{% endif %}">
+                    Painel Principal
+                </a>
+                <a href="{% url 'dashboard:profile' %}" class="list-group-item list-group-item-action {% if active_menu == 'profile' %}active{% endif %}">
+                    Meu Perfil
+                </a>
+                
+                {% if request.session.user_type == 'fisica' %}
+                <!-- Opções para pessoa física -->
+                <a href="{% url 'dashboard:minhas_trilhas' %}" class="list-group-item list-group-item-action {% if active_menu == 'minhas_trilhas' %}active{% endif %}">
+                    Minhas Trilhas
+                </a>
+                {% elif request.session.user_type == 'juridica' %}
+                <!-- Opções para pessoa jurídica -->
+                <a href="{% url 'dashboard:meu_empreendimento' %}" class="list-group-item list-group-item-action {% if active_menu == 'meu_empreendimento' %}active{% endif %}">
+                    Meu Empreendimento
+                </a>
+                <a href="{% url 'dashboard:estatisticas' %}" class="list-group-item list-group-item-action {% if active_menu == 'estatisticas' %}active{% endif %}">
+                    Estatísticas
+                </a>
+                {% endif %}
+                
+                <!-- Link para fóruns -->
+                <a href="{% url 'forum_view:forum' %}" class="list-group-item list-group-item-action {% if active_menu == 'forum' %}active{% endif %}">
+                    Fóruns
+                </a>
+                
+                <!-- Link para logout -->
+                <a href="{% url 'home_view:logout' %}" class="list-group-item list-group-item-action text-danger">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="col-md-9">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home_view:home' %}">Início</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:main' %}">Dashboard</a></li>
+                {% for crumb in breadcrumbs %}
+                    {% if forloop.last %}
+                        <li class="breadcrumb-item active" aria-current="page">{{ crumb.title }}</li>
+                    {% else %}
+                        <li class="breadcrumb-item"><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </nav>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">{% block dashboard_title %}Dashboard{% endblock %}</h5>
+            </div>
+            <div class="card-body">
+                {% block dashboard_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

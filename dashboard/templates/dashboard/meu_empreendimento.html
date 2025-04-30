@@ -1,0 +1,204 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block dashboard_title %}Meu Empreendimento{% endblock %}
+
+{% block dashboard_content %}
+<div class="alert alert-info mb-4">
+    <h5 class="alert-heading">Gerenciamento de Empreendimento</h5>
+    <p class="mb-0">Aqui você pode visualizar e atualizar as informações do seu empreendimento.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <!-- Cartão com informações básicas do empreendimento -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações Básicas</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="display-1 text-muted">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h4>{{ empreendimento.business_name }}</h4>
+                    <p class="text-muted">{{ empreendimento.region }}</p>
+                </div>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>CNPJ:</span>
+                        <span class="text-muted">{{ empreendimento.cnpj }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>E-mail:</span>
+                        <span class="text-muted">{{ empreendimento.business_email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Telefone:</span>
+                        <span class="text-muted">{{ empreendimento.business_phone }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editEmpresaModal">
+                    Editar Informações
+                </button>
+            </div>
+        </div>
+        
+        <!-- Cartão com informações do responsável -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Dados do Responsável</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Nome:</span>
+                        <span class="text-muted">{{ empreendimento.name }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>CPF:</span>
+                        <span class="text-muted">{{ empreendimento.cpf }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>RG:</span>
+                        <span class="text-muted">{{ empreendimento.rg }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>E-mail:</span>
+                        <span class="text-muted">{{ empreendimento.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Telefone:</span>
+                        <span class="text-muted">{{ empreendimento.phone }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <!-- Abas para diferentes seções de informação -->
+        <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="detalhes-tab" data-bs-toggle="tab" data-bs-target="#detalhes" type="button" role="tab" aria-controls="detalhes" aria-selected="true">Detalhes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="localizacao-tab" data-bs-toggle="tab" data-bs-target="#localizacao" type="button" role="tab" aria-controls="localizacao" aria-selected="false">Localização</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="redes-tab" data-bs-toggle="tab" data-bs-target="#redes" type="button" role="tab" aria-controls="redes" aria-selected="false">Redes Sociais</button>
+            </li>
+        </ul>
+        
+        <!-- Conteúdo das abas -->
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Detalhes do Empreendimento</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6>Descrição:</h6>
+                            <p>Informações detalhadas sobre o empreendimento seriam exibidas aqui.</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Serviços Oferecidos:</h6>
+                            <ul>
+                                <li>Serviço 1</li>
+                                <li>Serviço 2</li>
+                                <li>Serviço 3</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6>Horário de Funcionamento:</h6>
+                            <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary">Editar Detalhes</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="localizacao" role="tabpanel" aria-labelledby="localizacao-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Localização</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Endereço:</strong> {{ empreendimento.address }}</p>
+                        <p><strong>Região:</strong> {{ empreendimento.region }}</p>
+                        <p><strong>Referência:</strong> N/A</p>
+                        
+                        <div class="bg-light p-3 text-center mt-3">
+                            <p class="mb-0 text-muted">Mapa seria exibido aqui</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary">Atualizar Localização</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" id="redes" role="tabpanel" aria-labelledby="redes-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Redes Sociais</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Redes Sociais Atuais:</strong> {{ empreendimento.social_media|default:"Nenhuma rede social cadastrada" }}</p>
+                        
+                        <form class="mt-3">
+                            <div class="mb-3">
+                                <label for="instagram" class="form-label">Instagram</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span>
+                                    <input type="text" class="form-control" id="instagram" placeholder="seu_perfil">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="facebook" class="form-label">Facebook</label>
+                                <input type="text" class="form-control" id="facebook" placeholder="URL da página">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="site" class="form-label">Site</label>
+                                <input type="text" class="form-control" id="site" placeholder="www.seusite.com.br">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary">Salvar Redes Sociais</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para edição de informações do empreendimento -->
+<div class="modal fade" id="editEmpresaModal" tabindex="-1" aria-labelledby="editEmpresaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEmpresaModalLabel">Editar Informações do Empreendimento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulário para edição do empreendimento seria inserido aqui -->
+                <p class="text-center">Formulário de edição de empreendimento a ser implementado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

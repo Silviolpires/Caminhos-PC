@@ -1,0 +1,154 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block dashboard_title %}Meu Perfil{% endblock %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-md-4">
+        <!-- Card com informações básicas do perfil -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações Básicas</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="display-1 text-muted">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <h4>{{ usuario.name }}</h4>
+                    <p class="text-muted">
+                        {% if request.session.user_type == 'fisica' %}
+                            Pessoa Física
+                        {% elif request.session.user_type == 'juridica' %}
+                            Responsável por {{ usuario.business_name }}
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>E-mail:</span>
+                        <span class="text-muted">{{ usuario.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Telefone:</span>
+                        <span class="text-muted">{{ usuario.phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Cadastrado em:</span>
+                        <span class="text-muted">{{ usuario.created_at|date:"d/m/Y" }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    Editar Perfil
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <!-- Detalhes específicos baseados no tipo de usuário -->
+        {% if request.session.user_type == 'fisica' %}
+        <!-- Informações pessoais para pessoa física -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações Pessoais</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>CPF:</span>
+                        <span class="text-muted">{{ usuario.cpf }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>RG:</span>
+                        <span class="text-muted">{{ usuario.rg }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Data de Nascimento:</span>
+                        <span class="text-muted">{{ usuario.birth_date|date:"d/m/Y" }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>CEP:</span>
+                        <span class="text-muted">{{ usuario.cep }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Resumo das trilhas associadas -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Minhas Trilhas</h5>
+            </div>
+            <div class="card-body">
+                <p>Você ainda não se inscreveu em nenhuma trilha.</p>
+                <a href="{% url 'dashboard:minhas_trilhas' %}" class="btn btn-outline-primary">Gerenciar Trilhas</a>
+            </div>
+        </div>
+        
+        {% elif request.session.user_type == 'juridica' %}
+        <!-- Informações do empreendimento para pessoa jurídica -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações do Empreendimento</h5>
+            </div>
+            <div class="card-body">
+                <h4>{{ usuario.business_name }}</h4>
+                <ul class="list-group list-group-flush mt-3">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>CNPJ:</span>
+                        <span class="text-muted">{{ usuario.cnpj }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Endereço:</span>
+                        <span class="text-muted">{{ usuario.address }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Região:</span>
+                        <span class="text-muted">{{ usuario.region }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Telefone Comercial:</span>
+                        <span class="text-muted">{{ usuario.business_phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>E-mail Comercial:</span>
+                        <span class="text-muted">{{ usuario.business_email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Redes Sociais:</span>
+                        <span class="text-muted">{{ usuario.social_media }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'dashboard:meu_empreendimento' %}" class="btn btn-outline-primary">Gerenciar Empreendimento</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal para edição de perfil -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulário para edição do perfil seria inserido aqui -->
+                <p class="text-center">Formulário de edição de perfil a ser implementado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

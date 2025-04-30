@@ -1,0 +1,170 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block dashboard_title %}Estatísticas{% endblock %}
+
+{% block dashboard_content %}
+<div class="alert alert-info mb-4">
+    <h5 class="alert-heading">Estatísticas do Empreendimento</h5>
+    <p class="mb-0">Aqui você pode visualizar informações estatísticas relacionadas ao seu empreendimento.</p>
+</div>
+
+<div class="row mb-4">
+    <!-- Cards de resumo -->
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Visualizações</h6>
+                        <h2 class="card-text">258</h2>
+                    </div>
+                    <i class="bi bi-eye fs-1"></i>
+                </div>
+                <p class="card-text small mt-2 mb-0">+12% em relação ao mês anterior</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Contatos</h6>
+                        <h2 class="card-text">47</h2>
+                    </div>
+                    <i class="bi bi-telephone fs-1"></i>
+                </div>
+                <p class="card-text small mt-2 mb-0">+5% em relação ao mês anterior</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Interações</h6>
+                        <h2 class="card-text">134</h2>
+                    </div>
+                    <i class="bi bi-chat-dots fs-1"></i>
+                </div>
+                <p class="card-text small mt-2 mb-0">+8% em relação ao mês anterior</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Gráfico de visualizações -->
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Visualizações ao Longo do Tempo</h5>
+            </div>
+            <div class="card-body">
+                <div class="bg-light p-5 text-center">
+                    <p class="text-muted mb-0">Gráfico de linha seria exibido aqui</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Top regiões -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Top Regiões</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Brasília
+                        <span class="badge bg-primary rounded-pill">42%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Chapada dos Veadeiros
+                        <span class="badge bg-primary rounded-pill">25%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Pirenópolis
+                        <span class="badge bg-primary rounded-pill">18%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Formosa
+                        <span class="badge bg-primary rounded-pill">10%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Outras regiões
+                        <span class="badge bg-primary rounded-pill">5%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gráfico de tipo de interação -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Tipos de Interação</h5>
+            </div>
+            <div class="card-body">
+                <div class="bg-light p-5 text-center">
+                    <p class="text-muted mb-0">Gráfico de pizza seria exibido aqui</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Evolução mensal -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Evolução Mensal</h5>
+            </div>
+            <div class="card-body">
+                <div class="bg-light p-5 text-center">
+                    <p class="text-muted mb-0">Gráfico de barras seria exibido aqui</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Relatórios Disponíveis</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Relatório Mensal de Visualizações</h6>
+                            <p class="mb-0 small text-muted">Dados completos sobre visualizações do seu perfil</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">Download</button>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Relatório de Interações</h6>
+                            <p class="mb-0 small text-muted">Análise detalhada das interações com seu empreendimento</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">Download</button>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Análise de Público</h6>
+                            <p class="mb-0 small text-muted">Perfil demográfico das pessoas que interagem com seu empreendimento</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">Download</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

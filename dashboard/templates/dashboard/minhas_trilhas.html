@@ -1,0 +1,140 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block dashboard_title %}Minhas Trilhas{% endblock %}
+
+{% block dashboard_content %}
+<div class="alert alert-info mb-4">
+    <h5 class="alert-heading">Gerenciamento de Trilhas</h5>
+    <p class="mb-0">Aqui você pode visualizar as trilhas que você já se inscreveu e explorar novas trilhas disponíveis.</p>
+</div>
+
+<!-- Abas para navegar entre trilhas inscritas e disponíveis -->
+<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="inscricoes-tab" data-bs-toggle="tab" data-bs-target="#inscricoes" type="button" role="tab" aria-controls="inscricoes" aria-selected="true">Minhas Inscrições</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="disponiveis-tab" data-bs-toggle="tab" data-bs-target="#disponiveis" type="button" role="tab" aria-controls="disponiveis" aria-selected="false">Trilhas Disponíveis</button>
+    </li>
+</ul>
+
+<!-- Conteúdo das abas -->
+<div class="tab-content" id="myTabContent">
+    <!-- Aba de trilhas inscritas -->
+    <div class="tab-pane fade show active" id="inscricoes" role="tabpanel" aria-labelledby="inscricoes-tab">
+        <div class="row">
+            <!-- Mensagem quando não há trilhas inscritas -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-exclamation-circle display-1 text-muted mb-3"></i>
+                        <h4>Você ainda não se inscreveu em nenhuma trilha</h4>
+                        <p>Explore as trilhas disponíveis e inscreva-se naquelas que mais interessam a você.</p>
+                        <button class="btn btn-primary" id="exploreBtn">Explorar Trilhas</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exemplo de como seria exibida uma trilha inscrita -->
+            <!-- 
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Nome da Trilha</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Região:</strong> Nome da Região</p>
+                        <p><strong>Distância:</strong> 10km</p>
+                        <p><strong>Dificuldade:</strong> Média</p>
+                        <p><strong>Data de Inscrição:</strong> 01/01/2025</p>
+                        <div class="d-grid gap-2">
+                            <a href="#" class="btn btn-outline-primary">Ver Detalhes</a>
+                            <a href="#" class="btn btn-outline-danger">Cancelar Inscrição</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    
+    <!-- Aba de trilhas disponíveis -->
+    <div class="tab-pane fade" id="disponiveis" role="tabpanel" aria-labelledby="disponiveis-tab">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar trilhas..." aria-label="Buscar trilhas">
+                    <button class="btn btn-outline-secondary" type="button">Buscar</button>
+                </div>
+            </div>
+            <div class="col-auto">
+                <select class="form-select" aria-label="Filtrar por região">
+                    <option selected>Todas as regiões</option>
+                    <option value="1">Região Norte</option>
+                    <option value="2">Região Sul</option>
+                    <option value="3">Região Leste</option>
+                    <option value="4">Região Oeste</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Aqui seriam listadas as trilhas disponíveis -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Trilha do Cerrado</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Região:</strong> Região Norte</p>
+                        <p><strong>Distância:</strong> 8km</p>
+                        <p><strong>Dificuldade:</strong> Fácil</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Inscrever-se</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Chapada das Águas</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Região:</strong> Região Sul</p>
+                        <p><strong>Distância:</strong> 15km</p>
+                        <p><strong>Dificuldade:</strong> Difícil</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Inscrever-se</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Trilha das Cachoeiras</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Região:</strong> Região Leste</p>
+                        <p><strong>Distância:</strong> 12km</p>
+                        <p><strong>Dificuldade:</strong> Média</p>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Inscrever-se</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Script para alternar para a aba de trilhas disponíveis
+    document.getElementById('exploreBtn').addEventListener('click', function() {
+        document.getElementById('disponiveis-tab').click();
+    });
+</script>
+{% endblock %}
