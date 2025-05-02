@@ -4,6 +4,7 @@ from django.contrib import messages
 from home_view.models import PessoaFisica
 from .models import Trilha
 from .forms import TrilhaForm
+from .utils import admin_required  # Importando nosso decorador
 
 
 def lista_trilhas(request):
@@ -14,6 +15,7 @@ def detalhe_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     return render(request, 'trilhas_view/detalhe_trilha.html', {'trilha': trilha})
 
+@admin_required
 def criar_trilha(request):
     if request.method == 'POST':
         form = TrilhaForm(request.POST)
@@ -30,6 +32,7 @@ def criar_trilha(request):
         'botao': 'Criar'
     })
 
+@admin_required
 def editar_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     
@@ -48,6 +51,7 @@ def editar_trilha(request, trilha_id):
         'botao': 'Atualizar'
     })
 
+@admin_required
 def excluir_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     
@@ -60,6 +64,7 @@ def excluir_trilha(request, trilha_id):
 
 # (outras views já existentes)
 
+@admin_required
 def gerenciar_guias(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     
