@@ -14,6 +14,12 @@
     <div class="card">
         <div class="card-header">
             <h1>{{ trilha.nome }}</h1>
+            {% if user.is_superuser or user.is_staff %}
+            <div class="float-end">
+                <a href="{% url 'trilhas_view:editar_trilha' trilha.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'trilhas_view:excluir_trilha' trilha.id %}" class="btn btn-sm btn-danger">Excluir</a>
+            </div>
+            {% endif %}
         </div>
         <div class="card-body">
             <div class="row">
@@ -31,7 +37,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Guias disponíveis</h5>
+                            {% if user.is_superuser or user.is_staff %}
                             <a href="{% url 'trilhas_view:gerenciar_guias' trilha.id %}" class="btn btn-sm btn-info float-end">Gerenciar Guias</a>
+                            {% endif %}
                         </div>
                         <ul class="list-group list-group-flush">
                             {% if trilha.guias.all %}
@@ -44,12 +52,6 @@
                         </ul>
                     </div>
                 </div>
-
-                                    <!-- Adicione antes do fechamento do card-header em detalhe_trilha.html -->
-                    <div class="float-end">
-                        <a href="{% url 'trilhas_view:editar_trilha' trilha.id %}" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="{% url 'trilhas_view:excluir_trilha' trilha.id %}" class="btn btn-sm btn-danger">Excluir</a>
-                    </div>
             </div>
         </div>
         <div class="card-footer text-muted">
