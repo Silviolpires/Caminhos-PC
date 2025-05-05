@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home_view',
     'forum_view',
     'trilhas_view',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
