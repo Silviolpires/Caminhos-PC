@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-header">
             <h1>{{ trilha.nome }}</h1>
-            {% if user.is_superuser or user.is_staff %}
+            {% if is_admin %}
             <div class="float-end">
                 <a href="{% url 'trilhas_view:editar_trilha' trilha.id %}" class="btn btn-sm btn-warning">Editar</a>
                 <a href="{% url 'trilhas_view:excluir_trilha' trilha.id %}" class="btn btn-sm btn-danger">Excluir</a>
@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Guias disponíveis</h5>
-                            {% if user.is_superuser or user.is_staff %}
+                            {% if is_admin %}
                             <a href="{% url 'trilhas_view:gerenciar_guias' trilha.id %}" class="btn btn-sm btn-info float-end">Gerenciar Guias</a>
                             {% endif %}
                         </div>
