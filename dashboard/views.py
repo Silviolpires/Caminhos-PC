@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, UpdateView
-from home_view.decorators import login_required
+from home_view.views import login_required
 from django.utils.decorators import method_decorator
 from home_view.models import PessoaFisica, PessoaJuridica
 from django.urls import reverse_lazy
