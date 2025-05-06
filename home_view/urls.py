@@ -11,4 +11,5 @@ urlpatterns = [
     path('cadastro/pessoa-juridica/', views.PjSignUpView.as_view(), name='pj_signup'),
     path('amigos/', views.FriedsListView.as_view(), name='friends_list'),
     path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.logout_view, name='logout'),
 ]

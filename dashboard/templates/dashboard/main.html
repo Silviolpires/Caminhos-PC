@@ -1,0 +1,86 @@
+{% extends 'dashboard/dashboard.html' %}
+
+{% block dashboard_title %}Painel Principal{% endblock %}
+
+{% block dashboard_content %}
+<div class="alert alert-success mb-4">
+    <h4 class="alert-heading">Bem-vindo ao seu Dashboard!</h4>
+    <p>Olá, {{ request.session.user_name }}! Aqui você pode gerenciar sua conta e acessar todas as funcionalidades disponíveis.</p>
+</div>
+
+<div class="row">
+    <!-- Cards de acesso rápido com ícones -->
+    {% if request.session.user_type == 'fisica' %}
+    <!-- Cards para pessoa física -->
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-person-circle fs-1 mb-3 text-primary"></i>
+                <h5 class="card-title">Meu Perfil</h5>
+                <p class="card-text">Visualize e edite suas informações pessoais.</p>
+                <a href="{% url 'dashboard:profile' %}" class="btn btn-outline-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-map fs-1 mb-3 text-success"></i>
+                <h5 class="card-title">Minhas Trilhas</h5>
+                <p class="card-text">Gerencie suas trilhas favoritas e inscrições.</p>
+                <a href="{% url 'dashboard:minhas_trilhas' %}" class="btn btn-outline-success">Acessar</a>
+            </div>
+        </div>
+    </div>
+    {% elif request.session.user_type == 'juridica' %}
+    <!-- Cards para pessoa jurídica -->
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-building fs-1 mb-3 text-primary"></i>
+                <h5 class="card-title">Meu Empreendimento</h5>
+                <p class="card-text">Gerencie as informações do seu negócio.</p>
+                <a href="{% url 'dashboard:meu_empreendimento' %}" class="btn btn-outline-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up fs-1 mb-3 text-success"></i>
+                <h5 class="card-title">Estatísticas</h5>
+                <p class="card-text">Visualize estatísticas do seu empreendimento.</p>
+                <a href="{% url 'dashboard:estatisticas' %}" class="btn btn-outline-success">Acessar</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Card de fóruns para todos os tipos de usuário -->
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-chat-dots fs-1 mb-3 text-info"></i>
+                <h5 class="card-title">Fóruns</h5>
+                <p class="card-text">Participe das discussões nos fóruns da comunidade.</p>
+                <a href="{% url 'forum_view:forum' %}" class="btn btn-outline-info">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Atividades recentes -->
+<div class="mt-4">
+    <h4>Atividades Recentes</h4>
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Bem-vindo ao sistema!</h5>
+                <small>Agora</small>
+            </div>
+            <p class="mb-1">Você pode começar a explorar todas as funcionalidades disponíveis no menu lateral.</p>
+        </div>
+        <!-- Aqui poderiam ser listadas outras atividades do usuário -->
+    </div>
+</div>
+{% endblock %}

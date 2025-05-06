@@ -4,16 +4,33 @@ from django.contrib import messages
 from home_view.models import PessoaFisica
 from .models import Trilha
 from .forms import TrilhaForm
-
+from .utils import admin_required  # Importar o decorador
 
 def lista_trilhas(request):
     trilhas = Trilha.objects.all()
-    return render(request, 'trilhas_view/lista_trilhas.html', {'trilhas': trilhas})
+    # Adicionar verificação se o usuário é staff ou superuser
+    is_admin = False
+    if request.user.is_authenticated:
+        is_admin = request.user.is_superuser or request.user.is_staff
+    
+    return render(request, 'trilhas_view/lista_trilhas.html', {
+        'trilhas': trilhas,
+        'is_admin': is_admin
+    })
 
 def detalhe_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
-    return render(request, 'trilhas_view/detalhe_trilha.html', {'trilha': trilha})
+    # Adicionar verificação se o usuário é staff ou superuser
+    is_admin = False
+    if request.user.is_authenticated:
+        is_admin = request.user.is_superuser or request.user.is_staff
+    
+    return render(request, 'trilhas_view/detalhe_trilha.html', {
+        'trilha': trilha,
+        'is_admin': is_admin
+    })
 
+@admin_required
 def criar_trilha(request):
     if request.method == 'POST':
         form = TrilhaForm(request.POST)
@@ -30,6 +47,7 @@ def criar_trilha(request):
         'botao': 'Criar'
     })
 
+@admin_required
 def editar_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     
@@ -48,6 +66,7 @@ def editar_trilha(request, trilha_id):
         'botao': 'Atualizar'
     })
 
+@admin_required
 def excluir_trilha(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     
@@ -58,8 +77,7 @@ def excluir_trilha(request, trilha_id):
     
     return render(request, 'trilhas_view/confirmar_exclusao.html', {'trilha': trilha})
 
-# (outras views já existentes)
-
+@admin_required
 def gerenciar_guias(request, trilha_id):
     trilha = get_object_or_404(Trilha, pk=trilha_id)
     

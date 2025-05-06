@@ -30,7 +30,9 @@ def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.likes += 1
     post.save()
-    return redirect('forum_one', pk=post.id)
+    return redirect('forum_one', pk=post.pk)
+
+
 
 
 

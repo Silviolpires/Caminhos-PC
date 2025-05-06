@@ -6,7 +6,9 @@
 <!-- Adicione no início do bloco content em lista_trilhas.html -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Trilhas Disponíveis</h1>
+    {% if is_admin %}
     <a href="{% url 'trilhas_view:criar_trilha' %}" class="btn btn-success">Nova Trilha</a>
+    {% endif %}
 </div>
     
     {% if trilhas %}
