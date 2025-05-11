@@ -1,10 +1,12 @@
 {% extends 'home_view/base.html' %}
 
+{% load static %}
+
 {% block title %}Caminhos do Planalto Central - Início{% endblock %}
 
 {% block content %}
 <div class="text-center">
-    <h1 class="mb-4">Bem-vindo aos Caminhos do Planalto Central</h1>
+    <h1 class="mb-4">Bem-vindo a Rede Amigos dos Caminhos do Planalto Central</h1>
     
     {% if request.session.is_authenticated %}
         <!-- Conteúdo para usuários logados -->
@@ -27,15 +29,61 @@
         </div>
     {% else %}
         <!-- Conteúdo para visitantes (não logados) -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center ps-3">
             <div class="col-md-8">
-                <p class="lead mb-4">
-                    Somos uma plataforma dedicada a conectar parceiros e interessados nas trilhas que passam pela região de Brasília.
-                </p>
+                <div class="text-start mb-4"> <!-- Primeiro texto -->
+                <h3 class="mb-3">O que são os Caminhos do Planalto Central?</h3>
+                <p>Caminhos do Planalto Central é uma rede de trilhas com cerca de 400km de extensão
+                    que corta o Distrito Federal.</p>
+
+                <p>Ele faz parte do Caminho do Gyazes (percurso que vai da cidade de Goiás até a Chapada dos Veadeiros) que por sua vez faz parte da Rede Nacional de Trilhas.</p>
+                <a href="https://cpc.rebas.com.br/" class="btn btn-warning btn-sm mt-3" target="blank">Saiba mais</a>
+                </div>
+                <div class="text-start"> <!-- Segundo texto -->
+                    <h3>O que é a Rede Amigos do CPC?</h3>
+                    <p>A Rede Amigos do CPC é um espaço colaborativo para compartilhar esforços no desenvolvimento de serviços, produtos turísticos e atividades nas Trilhas do CPC.
+                    </p>
+                    <p>Ela reúne prfissionais, prestadores de serviços, produtores rurais, trilheiros dentre outros interessados.</p>
+                </div>
+
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="{% static 'home_view/img1.jpg' %}" class="d-block w-100 h-100" alt="Imagem 1">
+                      </div>
+
+                      <div class="carousel-item">
+                        <img src="{% static 'home_view/img3.jpg' %}" class="d-block w-100 h-100" alt="Imagem 3">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'home_view/img4.jpg' %}" class="d-block w-100 h-100" alt="Imagem 4">
+                      </div>
+                      
+                      <div class="carousel-item">
+                        <img src="{% static 'home_view/img6.jpg' %}" class="d-block w-100 h-100" alt="Imagem 6">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'home_view/img7.jpg' %}" class="d-block w-100 h-100" alt="Imagem 7">
+                      </div>
+                      
+                      <div class="carousel-item">
+                        <img src="{% static 'home_view/img9.jpg' %}" class="d-block w-100 h-100" alt="Imagem 9">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                  
                 
-                <div class="mb-4">
-                    <a href="{% url 'home_view:user_type' %}" class="btn btn-primary btn-lg">Cadastre-se</a>
-                    <a href="{% url 'home_view:login' %}" class="btn btn-outline-primary btn-lg ms-2">Login</a>
+                <div class="mb-4 mt-4">
+                    <h5>Quer fazer parte? Cadastre-se agora e torne-se um Aimgo do CPC!</h5>
+                    <a href="{% url 'home_view:user_type' %}" class="btn btn-outline-success btn-lg mb-3 mt-3">Cadastre-se</a>
+                    <h5 class="mb-3">Já tem cadastro? Então faça login e comece a interagir conosco!</h5>
+                    <a href="{% url 'home_view:login' %}" class="btn btn-outline-success btn-lg ms-2">Login</a>
                 </div>
             </div>
         </div>
@@ -75,17 +123,4 @@
         </div>
     </div>
     
-    <!-- Seção Sobre o Projeto (visível para todos) -->
-    <div class="mt-5">
-        <h2 class="mb-4">Sobre o Projeto</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <p>
-                    Os Caminhos do Planalto Central é uma iniciativa que visa catalogar e promover as trilhas 
-                    da região central do Brasil, conectando turistas, empresas e entusiastas do ecoturismo.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
