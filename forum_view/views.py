@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
+
 # Create your views here.
 class ForumView(TemplateView):
     template_name = 'forum/forum.html'
