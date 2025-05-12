@@ -6,6 +6,8 @@ from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 
 
+################################################ enzo enzo
+
 
 
 
@@ -39,18 +41,28 @@ def like_post(request, post_id):
 
 
 
-@login_required
 def criar_post(request):
+    if not request.session.get('is_authenticated'):
+        return redirect('/login/?next=/forum/formulario/')
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.autor = request.user
+
+            # Aqui você precisa buscar o "autor"
+            from django.contrib.auth.models import User
+            try:
+                user = User.objects.get(email=request.session.get('user_email'))
+                post.autor = user
+            except User.DoesNotExist:
+                return HttpResponse("Usuário não encontrado no sistema de autenticação.")
+
             post.save()
             return redirect('forum_view:forum')
     else:
         form = PostForm()
-        
+
     return render(request, 'forum/forumForm.html', {'form': form})
 
 
