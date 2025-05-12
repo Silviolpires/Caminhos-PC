@@ -2,12 +2,13 @@
 
 from django.urls import path
 from . import views
+from .views import DashboardView
 
 app_name = 'dashboard'
 
 urlpatterns = [
     # View principal do dashboard
-    path('', views.DashboardView.as_view(), name='main'),
+    path('', DashboardView.as_view(), name='main'),
     
     # Perfil do usuário
     path('perfil/', views.ProfileView.as_view(), name='profile'),

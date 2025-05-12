@@ -6,6 +6,7 @@ from home_view.views import login_required
 from django.utils.decorators import method_decorator
 from home_view.models import PessoaFisica, PessoaJuridica
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
 # View principal do dashboard
 @method_decorator(login_required, name='dispatch')
