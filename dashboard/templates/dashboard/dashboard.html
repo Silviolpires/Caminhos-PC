@@ -49,15 +49,9 @@
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'home_view:home' %}">Início</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:main' %}">Dashboard</a></li>
-                {% for crumb in breadcrumbs %}
-                    {% if forloop.last %}
-                        <li class="breadcrumb-item active" aria-current="page">{{ crumb.title }}</li>
-                    {% else %}
-                        <li class="breadcrumb-item"><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                
+                <li class="breadcrumb-item"><a href="{% url 'home_view:home' %}" class="btn btn-warning btn-sm mt-3">Início</a></li>
+                
             </ol>
         </nav>
         

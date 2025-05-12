@@ -4,7 +4,7 @@
 
 {% block dashboard_content %}
 <div class="alert alert-success mb-4">
-    <h4 class="alert-heading">Bem-vindo ao seu Dashboard!</h4>
+    <h4 class="alert-heading">Bem-vindo(a) ao seu Dashboard!</h4>
     <p>Olá, {{ request.session.user_name }}! Aqui você pode gerenciar sua conta e acessar todas as funcionalidades disponíveis.</p>
 </div>
 
@@ -18,7 +18,7 @@
                 <i class="bi bi-person-circle fs-1 mb-3 text-primary"></i>
                 <h5 class="card-title">Meu Perfil</h5>
                 <p class="card-text">Visualize e edite suas informações pessoais.</p>
-                <a href="{% url 'dashboard:profile' %}" class="btn btn-outline-primary">Acessar</a>
+                <a href="{% url 'dashboard:profile' %}" class="btn btn-outline-success">Acessar</a>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                 <i class="bi bi-building fs-1 mb-3 text-primary"></i>
                 <h5 class="card-title">Meu Empreendimento</h5>
                 <p class="card-text">Gerencie as informações do seu negócio.</p>
-                <a href="{% url 'dashboard:meu_empreendimento' %}" class="btn btn-outline-primary">Acessar</a>
+                <a href="{% url 'dashboard:meu_empreendimento' %}" class="btn btn-outline-info">Acessar</a>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
                 <i class="bi bi-chat-dots fs-1 mb-3 text-info"></i>
                 <h5 class="card-title">Fóruns</h5>
                 <p class="card-text">Participe das discussões nos fóruns da comunidade.</p>
-                <a href="{% url 'forum_view:forum' %}" class="btn btn-outline-info">Acessar</a>
+                <a href="{% url 'forum_view:forum' %}" class="btn btn-outline-success">Acessar</a>
             </div>
         </div>
     </div>

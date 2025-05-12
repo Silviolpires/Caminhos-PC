@@ -4,7 +4,7 @@ from .models import PessoaFisica, PessoaJuridica
 class PessoaFisicaForm(forms.ModelForm):
     password_confirm = forms.CharField(
         label='Confirmar Senha',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         max_length=255
     )
     
@@ -15,9 +15,15 @@ class PessoaFisicaForm(forms.ModelForm):
             'phone', 'email', 'password'
         ]
         widgets = {
-            'birth_date': forms.DateInput(attrs={'type': 'date'}),
-            'password': forms.PasswordInput(),
+            'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if not field.widget.attrs.get('class'):
+                field.widget.attrs['class'] = 'form-control'
 
     def clean(self):
         cleaned_data = super().clean()
@@ -33,7 +39,7 @@ class PessoaFisicaForm(forms.ModelForm):
 class PessoaJuridicaForm(forms.ModelForm):
     password_confirm = forms.CharField(
         label='Confirmar Senha',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         max_length=255
     )
     
@@ -45,11 +51,17 @@ class PessoaJuridicaForm(forms.ModelForm):
             'business_phone', 'business_email', 'social_media'
         ]
         widgets = {
-            'birth_date': forms.DateInput(attrs={'type': 'date'}),  # Widget para data
-            'password': forms.PasswordInput(),
-            'social_media': forms.Textarea(attrs={'rows': 3}),
-            'address': forms.Textarea(attrs={'rows': 2}),
+            'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),  # Widget para data
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'social_media': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'rows': 2, 'class': 'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if not field.widget.attrs.get('class'):
+                field.widget.attrs['class'] = 'form-control'
         
     def clean(self):
         cleaned_data = super().clean()
