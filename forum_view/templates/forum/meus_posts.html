@@ -1,0 +1,11 @@
+<h2>Meus Posts</h2>
+
+{% for post in posts %}
+    <div>
+        <h3>{{ post.titulo }}</h3>
+        <p>{{ post.descricao }}</p>
+        <small>{{ post.criado_em }}</small>
+    </div>
+{% empty %}
+    <p>Você ainda não criou nenhum post.</p>
+{% endfor %}

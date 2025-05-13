@@ -1,25 +1,32 @@
-{% extends 'home_view/base.html' %}
+{% extends 'home_view/base.html' %} 
 
 {% block title %}Fórum{% endblock %}
 
 {% block content %}
 <h1 class="titulo-forum">Fórum</h1>
 
-<div>
-    <a href="{% url 'forum_view:criar_post' %}" class="btn btn-outline-success btn-lg mb-3 mt-3">Postar no fórum</a>
-    <a href="" class="btn btn-outline-info btn-lg mb-3 mt-3">Meus posts</a>
-</div>
+{% if request.session.is_authenticated %}
+    <a href="{% url 'forum_view:meus_posts' %}">Meus Posts</a>
+{% endif %}
+
+<p>Usuário logado: {{ user.username }}</p>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'forum_view:criar_post' %}" class="btn btn-primary">Novo Post</a>
+{% endif %}
+
+
 
 <div class="post-container">
     {% for post in posts %}
         <div class="post-card">
             {% if post.imagem %}
-                <img src="{{ post.imagem.url }}" class="img-fluid rounded mb-2" alt="Imagem do Post">
+                <img src="{{ post.imagem.url }}" alt="Imagem do Post">
             {% endif %}
             <h2>{{ post.titulo }}</h2>
             <p>{{ post.descricao|truncatewords:20 }}</p>
             <p><strong>Curtidas:</strong> {{ post.likes }}</p>
-            <a class="btn btn-outline-info btn-sm mb-3" href="{% url 'forum_view:forum_one' post.pk %}">Ver mais</a>
+            <a class="btn-vermais" href="{% url 'forum_view:forum_one' post.pk %}">Ver mais</a>
 
         </div>
     {% empty %}
@@ -27,6 +34,7 @@
     {% endfor %}
 </div>
 {% endblock %}
+
 
 {% block extra_head %}
     {% load static %}
