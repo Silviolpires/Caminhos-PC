@@ -4,12 +4,7 @@ from .models import Post
 from django.shortcuts import get_object_or_404, redirect
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
-
-
-################################################ enzo enzo
-
-
-
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -32,11 +27,23 @@ def forumOne(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'forum/forumOne.html', {'post': post})
 
+
+
 def like_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    post.likes += 1
+    user = request.user
+
+    if user in post.users_who_liked.all():
+        # Se o usuário já curtiu, remova o like
+        post.users_who_liked.remove(user)
+        post.likes -= 1
+    else:
+        # Se o usuário não curtiu, adicione o like
+        post.users_who_liked.add(user)
+        post.likes += 1
+
     post.save()
-    return redirect('forum_view:forum_one', pk=post.pk)
+    return redirect('forum_view:forum_one', post_id)
 
 
 
@@ -69,6 +76,7 @@ def criar_post(request):
 
 
 
+@login_required
 def meus_posts(request):
     posts = Post.objects.filter(autor=request.user).order_by('-criado_em')
     return render(request, 'forum/meus_posts.html', {'posts': posts})

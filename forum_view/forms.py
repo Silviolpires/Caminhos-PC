@@ -8,21 +8,25 @@ class PostForm(forms.ModelForm):
 
         widgets = {
             'titulo': forms.TextInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Digite um título',
                 'required': True,
                 'id': 'titulo',
             }),
             'tipo': forms.Select(attrs={
+                'class': 'form-select',
                 'id': 'tipo',
                 'required': True,
             }),
             'descricao': forms.Textarea(attrs={
+                'class': 'form-control',
                 'rows': 4,
                 'cols': 50,
                 'required': True,
                 'id': 'descricao',
             }),
             'imagem': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
                 'accept': 'image/*',
                 'id': 'imagem',
             }),

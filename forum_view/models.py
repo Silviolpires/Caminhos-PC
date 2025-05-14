@@ -13,6 +13,13 @@ class Post(models.Model):
     imagem = models.ImageField(upload_to='uploads/', blank=True, null=True)
     likes = models.IntegerField(default=0)
     criado_em = models.DateTimeField(auto_now_add=True)
+    users_who_liked = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+
+    def like(self, user):
+        if not self.users_who_liked.filter(id=user.id).exists():
+            self.likes += 1
+            self.users_who_liked.add(user)
+            self.save()
 
 
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
